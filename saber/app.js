@@ -38,7 +38,7 @@
     if (!text) return;
 
     addMessage({ text, author: 'user' });
-    input.value = '';
+       input.value = '';
     input.focus();
 
     // Optional: a fake bot reply to make the UI feel alive (still no real AI).
