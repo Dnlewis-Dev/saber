@@ -1,10 +1,12 @@
 # #!/usr/bin/env sh
-# . "$(dirname -- "$0")/_/husky.sh"
+# set -e
+
+# echo "Running pre-commit checks..."
 
 # npx lint-staged
 
-# exit 1
-
 #!/usr/bin/env sh
-echo "HUSKY PRE-COMMIT RUNNING"
+set -e
+
+echo "PRE-COMMIT DEFINITELY RAN"
 exit 1
