@@ -38,10 +38,9 @@
     if (!text) return;
 
     addMessage({ text, author: 'user' });
-       input.value = '';
+    input.value = '';
     input.focus();
 
-    // Optional: a fake bot reply to make the UI feel alive (still no real AI).
     window.setTimeout(() => {
       addMessage({
         text: 'Got it — UI message received. (No AI connected yet.)',
