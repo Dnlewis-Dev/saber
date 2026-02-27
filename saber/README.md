@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# Saber - Web Dev Course
 
 Saber runs **Prettier**  and **ESLint**. Using the below scripts:
 
