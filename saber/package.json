@@ -11,7 +11,7 @@
     "format": "prettier . --check",
     "format:write": "prettier . --write",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "git config core.hooksPath .husky"
   },
   "dependencies": {
     "react": "^19.2.0",
@@ -37,7 +37,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "eslint"
     ],
     "*.{js,jsx,ts,tsx,json,css,md,yml,yaml,html}": [
       "prettier --check"
