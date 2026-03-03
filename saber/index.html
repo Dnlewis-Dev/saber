@@ -4,55 +4,260 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Saber Chat</title>
-    <link rel="stylesheet" href="./styles.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
-  <body>
-    <main class="app">
-      <header class="app__header">
-        <div class="brand">
-          <div class="brand__dot" aria-hidden="true"></div>
-          <div>
-            <h1 class="brand__title">Saber Chat</h1>
-            <p class="brand__subtitle">Assignment 1</p>
-          </div>
+  <body class="h-screen bg-slate-950 text-slate-100">
+    <div class="h-full flex">
+      <aside class="w-72 shrink-0 border-r border-slate-800 bg-slate-950/60">
+        <div class="p-4">
+          <button
+            type="button"
+            class="w-full rounded-xl bg-emerald-500/15 px-4 py-3 text-sm font-semibold text-emerald-200 ring-1 ring-inset ring-emerald-400/20 hover:bg-emerald-500/20"
+          >
+            + New Chat
+          </button>
         </div>
-      </header>
 
-      <section class="chat" aria-label="Chat interface">
-        <ul
-          id="messageList"
-          class="chat__messages"
-          aria-label="Message list"
-          aria-live="polite"
-        >
-          <li class="msg msg--bot">
-            <div class="msg__bubble">
-              <p class="msg__text">
-                Hi! Type a message and hit Send. (This is still the static
-                version.)
+        <div class="px-2 pb-4">
+          <p
+            class="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400"
+          >
+            Conversations
+          </p>
+
+          <nav class="space-y-1">
+            <a
+              href="#"
+              class="flex items-center gap-3 rounded-xl bg-slate-800/60 px-3 py-3 ring-1 ring-inset ring-slate-700"
+              aria-current="page"
+            >
+              <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+              <div class="min-w-0">
+                <p class="truncate text-sm font-semibold text-slate-100">
+                  Saber Chat
+                </p>
+                <p class="truncate text-xs text-slate-400">Assignment 02</p>
+              </div>
+            </a>
+
+            <a
+              href="#"
+              class="flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-slate-900/60"
+            >
+              <span class="h-2 w-2 rounded-full bg-slate-600"></span>
+              <div class="min-w-0">
+                <p class="truncate text-sm font-semibold text-slate-200">
+                  Meteor
+                </p>
+                <p class="truncate text-xs text-slate-500">Another Chat 1</p>
+              </div>
+            </a>
+
+            <a
+              href="#"
+              class="flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-slate-900/60"
+            >
+              <span class="h-2 w-2 rounded-full bg-slate-600"></span>
+              <div class="min-w-0">
+                <p class="truncate text-sm font-semibold text-slate-200">
+                  w-dev
+                </p>
+                <p class="truncate text-xs text-slate-500">Another Chat 2</p>
+              </div>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="flex-1 flex flex-col">
+        <header class="border-b border-slate-800 bg-slate-950/60 px-6 py-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="text-base font-semibold">Saber Chat</h1>
+              <p class="text-xs text-slate-400">
+                Assignment 02 • Static UI (Tailwind)
               </p>
-              <span class="msg__meta">Bot</span>
             </div>
-          </li>
-        </ul>
 
-        <form id="chatForm" class="chat__composer" autocomplete="off">
-          <label class="sr-only" for="messageInput">Type a message</label>
-          <input
-            id="messageInput"
-            class="chat__input"
-            type="text"
-            placeholder="Type your message…"
-            maxlength="500"
-            required
-          />
+            <span
+              class="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-300"
+            >
+              Offline
+            </span>
+          </div>
+        </header>
 
-          <button id="sendBtn" class="chat__send" type="submit">Send</button>
-        </form>
-      </section>
-    </main>
+   
+        <section
+          class="flex-1 overflow-y-auto px-6 py-6"
+          aria-label="Message list"
+        >
+          <div
+            id="messageList"
+            class="mx-auto w-full max-w-3xl space-y-4"
+            aria-live="polite"
+          >
+            <chat-message role="ai">
+              Hi! This is you saber bot
+            </chat-message>
 
-    <script src="./app.js" defer></script>
+            <chat-message role="user">
+              Cool
+            </chat-message>
+
+            <chat-message role="ai">
+              Yup, need anything?
+            </chat-message>
+
+            <chat-message role="user">
+              Nope, just testing the UI. This looks great!
+            </chat-message>
+
+            <chat-message role="ai">
+              Yep — these bubbles are rendered by a custom element
+              
+            </chat-message>
+          </div>
+        </section>
+
+        <footer class="border-t border-slate-800 bg-slate-950/80 px-6 py-4">
+          <div class="mx-auto w-full max-w-3xl">
+            <form id="chatForm" class="flex gap-3">
+              <label class="sr-only" for="messageInput">Type your message</label>
+
+              <textarea
+                id="messageInput"
+                class="min-h-[52px] w-full resize-none rounded-2xl border border-slate-700 bg-slate-900/60 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                placeholder="Type your message…"
+                maxlength="500"
+                required
+              ></textarea>
+
+              <button
+                id="sendBtn"
+                type="submit"
+                class="shrink-0 rounded-2xl bg-emerald-500/20 px-5 py-3 text-sm font-semibold text-emerald-200 ring-1 ring-inset ring-emerald-400/25 hover:bg-emerald-500/25"
+              >
+                Send
+              </button>
+            </form>
+
+            <p class="mt-2 text-xs text-slate-500">
+              Demo mode
+            </p>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <script>
+      class ChatMessage extends HTMLElement {
+        connectedCallback() {
+          const role = (this.getAttribute('role') || 'ai').toLowerCase();
+          const isUser = role === 'user';
+
+          const content = this.innerHTML.trim();
+          this.innerHTML = '';
+
+          const row = document.createElement('div');
+          row.className = isUser ? 'flex justify-end' : 'flex justify-start';
+
+          const bubble = document.createElement('div');
+          bubble.className = [
+            'max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ring-1 ring-inset',
+            isUser
+              ? 'bg-emerald-500/15 text-emerald-50 ring-emerald-400/20 rounded-tr-md'
+              : 'bg-slate-900/60 text-slate-100 ring-slate-700 rounded-tl-md',
+          ].join(' ');
+
+          bubble.innerHTML = content;
+
+          const meta = document.createElement('div');
+          meta.className = isUser
+            ? 'mt-1 text-[11px] text-emerald-200/70 text-right'
+            : 'mt-1 text-[11px] text-slate-400';
+          meta.textContent = isUser ? 'You' : 'AI';
+
+          const stack = document.createElement('div');
+          stack.appendChild(bubble);
+          stack.appendChild(meta);
+
+          row.appendChild(stack);
+          this.appendChild(row);
+        }
+      }
+
+      customElements.define('chat-message', ChatMessage);
+
+      (function () {
+        const messageList = document.getElementById('messageList');
+        const form = document.getElementById('chatForm');
+        const input = document.getElementById('messageInput');
+
+        if (!messageList || !form || !input) return;
+
+        const cannedReplies = [
+          'Got it.',
+          'Makes sense — tell me a bit more.',
+          'Okay. What outcome do you want?',
+          'Noted. Want me to summarize or propose next steps?',
+          'Cool — that works for the prototype.',
+        ];
+
+        let replyIndex = 0;
+
+        function escapeHtml(str) {
+          return str
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#039;');
+        }
+
+        function appendMessage({ role, text }) {
+          const el = document.createElement('chat-message');
+          el.setAttribute('role', role);
+          el.innerHTML = escapeHtml(text);
+          messageList.appendChild(el);
+
+          
+          messageList.parentElement.scrollTop = messageList.parentElement.scrollHeight;
+        }
+
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const text = input.value.trim();
+          if (!text) return;
+
+          appendMessage({ role: 'user', text });
+          input.value = '';
+          input.focus();
+
+          window.setTimeout(() => {
+            const reply = cannedReplies[replyIndex % cannedReplies.length];
+            replyIndex += 1;
+            appendMessage({ role: 'ai', text: reply });
+          }, 350);
+        });
+      })();
+    </script>
+
+    <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
   </body>
 </html>
