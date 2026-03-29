@@ -1,5 +1,7 @@
 Chat UI prototype for web development course.
 
+Put API KEY in line 10 of api.js
+
 ## Requirements covered
 
 - ESLint configured (no errors when running on repo JS)

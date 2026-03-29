@@ -18,7 +18,7 @@
           <button class="btn btn--ghost" type="button">New Chat</button>
         </div>
 
-        <h2 class="sidebar__title">Conversations</h2>
+        <h2 class="sidebar__title">Your Conversations</h2>
         <ul class="sidebar__list">
           <li class="sidebar__item sidebar__item--active">
             <a href="#">Chat about Javascript</a>
@@ -54,7 +54,7 @@
           aria-label="Message list"
           aria-live="polite"
         >
-          <chat-message role="bot">
+          <!-- <chat-message role="bot">
             JavaScript is a programming language used to create interactive
             effects within web browsers.
           </chat-message>
@@ -63,7 +63,7 @@
 
           <chat-message role="bot">
             Ask something else — this is still a demo UI (no real AI connected).
-          </chat-message>
+          </chat-message> -->
         </section>
 
         <form class="input-area" id="chatForm" autocomplete="off">
@@ -81,6 +81,6 @@
       </main>
     </div>
 
-    <script src="./app.js" defer></script>
+    <script type="module" src="./main.js"></script>
   </body>
 </html>
