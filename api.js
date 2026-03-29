@@ -7,8 +7,7 @@ export async function streamChatCompletion({
   messages,
   onDelta,
 }) {
-  const apiKey =
-    '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';
+  const apiKey = '';
   const res = await fetch(OPENROUTER_URL, {
     method: 'POST',
     headers: {
