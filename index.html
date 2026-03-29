@@ -26,6 +26,9 @@
           <li class="sidebar__item">
             <a href="#">Help with CSS</a>
           </li>
+          <li class="sidebar__item">
+            <a href="#">Web development work</a>
+          </li>
         </ul>
 
         <!-- <div class="sidebar__nav">
@@ -51,21 +54,16 @@
           aria-label="Message list"
           aria-live="polite"
         >
-          <div class="message bot">
-            <p>
-              JavaScript is a programming language used to create interactive
-              effects within web browsers.
-            </p>
-          </div>
-          <div class="message user">
-            <p>What is JavaScript?</p>
-          </div>
-          <div class="message bot">
-            <p>
-              Ask something else — this is still a demo UI (no real AI
-              connected).
-            </p>
-          </div>
+          <chat-message role="bot">
+            JavaScript is a programming language used to create interactive
+            effects within web browsers.
+          </chat-message>
+
+          <chat-message role="user">What is JavaScript?</chat-message>
+
+          <chat-message role="bot">
+            Ask something else — this is still a demo UI (no real AI connected).
+          </chat-message>
         </section>
 
         <form class="input-area" id="chatForm" autocomplete="off">

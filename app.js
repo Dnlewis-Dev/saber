@@ -1,3 +1,20 @@
+class ChatMessage extends HTMLElement {
+  connectedCallback() {
+    const role = (this.getAttribute('role') || 'bot').toLowerCase();
+    const isUser = role === 'user';
+
+    // Ensure it renders with your existing CSS classes
+    this.classList.add('message', isUser ? 'user' : 'bot');
+
+    // Normalize content: wrap in <p> if not already
+    const raw = this.innerHTML.trim();
+    const hasParagraph = raw.startsWith('<p') && raw.includes('</p>');
+    this.innerHTML = hasParagraph ? raw : `<p>${raw}</p>`;
+  }
+}
+
+customElements.define('chat-message', ChatMessage);
+
 (function () {
   const form = document.getElementById('chatForm');
   const input = document.getElementById('messageInput');
@@ -8,7 +25,7 @@
   const botReplies = [
     'Got it. Want a short example?',
     'Okay — do you mean syntax, DOM, or async?',
-    'Noted. What’s the exact output you expect?',
+    'Noted. What exact output do you expect?',
     'Makes sense. Want me to summarize in 1–2 sentences?',
     'Cool — keep going.',
   ];
@@ -25,13 +42,13 @@
   }
 
   function appendMessage(role, text) {
-    const wrap = document.createElement('div');
-    wrap.className = `message ${role}`;
+    const el = document.createElement('chat-message');
+    el.setAttribute('role', role);
+    el.innerHTML = escapeHtml(text);
 
-    wrap.innerHTML = `<p>${escapeHtml(text)}</p>`;
-    messagesContainer.appendChild(wrap);
+    messagesContainer.appendChild(el);
 
-    // keep scrolled to bottom
+    // Keep scrolled to bottom
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
 
@@ -46,7 +63,6 @@
     input.value = '';
     input.focus();
 
-    // automated bot response (demo)
     window.setTimeout(() => {
       const reply = botReplies[replyIndex % botReplies.length];
       replyIndex += 1;
