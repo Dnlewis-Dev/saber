@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saber - AI Chat app</title>
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <aside class="sidebar">
+        <div class="sidebar__top">
+          <div class="brand">
+            <!-- <span class="brand__icon">🧹</span> -->
+            <span class="brand__name">Saber</span>
+          </div>
+          <button class="btn btn--ghost" type="button">New Chat</button>
+        </div>
+
+        <h2 class="sidebar__title">Conversations</h2>
+        <ul class="sidebar__list">
+          <li class="sidebar__item sidebar__item--active">
+            <a href="#">Chat about Javascript</a>
+          </li>
+          <li class="sidebar__item">
+            <a href="#">Help with CSS</a>
+          </li>
+          <li class="sidebar__item">
+            <a href="#">Web development work</a>
+          </li>
+        </ul>
+
+        <!-- <div class="sidebar__nav">
+          <button class="navbtn" type="button" aria-label="Home">⌂</button>
+          <button class="navbtn" type="button" aria-label="Tasks">☰</button>
+          <button class="navbtn" type="button" aria-label="History">⏱</button>
+          <button class="navbtn" type="button" aria-label="Add">＋</button>
+          <button class="navbtn" type="button" aria-label="Settings">⚙</button>
+        </div> -->
+      </aside>
+
+      <main class="chat">
+        <header class="chat__header">
+          <div>
+            <h1 class="chat__title">Chat about Javascript</h1>
+          </div>
+          <div class="statuspill">Offline</div>
+        </header>
+
+        <section
+          class="messages"
+          id="messageList"
+          aria-label="Message list"
+          aria-live="polite"
+        >
+          <chat-message role="bot">
+            JavaScript is a programming language used to create interactive
+            effects within web browsers.
+          </chat-message>
+
+          <chat-message role="user">What is JavaScript?</chat-message>
+
+          <chat-message role="bot">
+            Ask something else — this is still a demo UI (no real AI connected).
+          </chat-message>
+        </section>
+
+        <form class="input-area" id="chatForm" autocomplete="off">
+          <label class="sr-only" for="messageInput">Type your message</label>
+          <input
+            id="messageInput"
+            type="text"
+            placeholder="Type your message..."
+            maxlength="500"
+          />
+          <button type="submit" id="sendBtn" class="btn btn--primary">
+            Send
+          </button>
+        </form>
+      </main>
+    </div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
