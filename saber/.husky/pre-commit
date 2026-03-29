@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-set -e
-
-echo "Running pre-commit checks..."
-cd saber
-npx lint-staged --concurrent false
