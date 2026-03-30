@@ -26,3 +26,12 @@ export function createMessage(conversationId, { role, content }) {
   messagesDb[conversationId].push(msg);
   return Promise.resolve(msg);
 }
+
+export function updateMessage(conversationId, messageId, patch) {
+  const list = messagesDb[conversationId] || [];
+  const idx = list.findIndex((m) => m.id === messageId);
+  if (idx === -1) return Promise.resolve(null);
+
+  list[idx] = { ...list[idx], ...patch };
+  return Promise.resolve(list[idx]);
+}

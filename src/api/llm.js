@@ -1,13 +1,13 @@
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
-const OPENROUTER_API_KEY = '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';
+const OPENROUTER_API_KEY = '...';
 console.log('OPENROUTER_API_KEY length:', OPENROUTER_API_KEY?.trim()?.length);
 const MODEL = 'openai/gpt-4o-mini';
 
 export async function requestOpenRouterCompletion({ messages }) {
-  if (!OPENROUTER_API_KEY || OPENROUTER_API_KEY === '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') {
-    throw new Error('Missing OpenRouter API key in src/api/llm.js');
-  }
+  if (OPENROUTER_API_KEY.trim().length === 0) {
+  throw new Error('Missing OpenRouter API key in src/api/llm.js');
+}
 
   const res = await fetch(OPENROUTER_URL, {
     method: 'POST',

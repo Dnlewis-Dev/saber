@@ -73,15 +73,22 @@ export default function App() {
 
     const assistantMsg = await messagesApi.createMessage(activeConversationId, {
       role: 'assistant',
-      content: assistantText,
-    });
+      content: '',
+    }); 
 
     setMessages((prev) => [...prev, assistantMsg]);
+    //wordbyword
+    await typeIntoAssistantMessage({
+    conversationId: activeConversationId,
+    messageId: assistantMsg.id,
+    fullText: assistantText,
+    setMessages,})
   } catch (err) {
     const errorMsg = await messagesApi.createMessage(activeConversationId, {
       role: 'assistant',
       content: `⚠ OpenRouter failed: ${err?.message || String(err)}`,
     });
+    console.error('OpenRouter error:', err);
     setMessages((prev) => [...prev, errorMsg]);
   } finally {
     setIsLoadingReply(false);
@@ -90,7 +97,32 @@ export default function App() {
 
   const activeConversation =
     conversations.find((c) => c.id === activeConversationId) || null;
+async function typeIntoAssistantMessage({
+  conversationId,
+  messageId,
+  fullText,
+  setMessages,
+}) {
+  const words = fullText.split(/(\s+)/); // keeps spaces so formatting looks natural
+  let built = '';
 
+  for (const chunk of words) {
+    built += chunk;
+
+    // update React state
+    setMessages((prev) =>
+      prev.map((m) => (m.id === messageId ? { ...m, content: built } : m)),
+    );
+
+    // update mock DB so history remains accurate
+    await import('./api/messages.js').then((mod) =>
+      mod.updateMessage(conversationId, messageId, { content: built }),
+    );
+
+    // speed control (adjust as desired)
+    await new Promise((r) => setTimeout(r, 25));
+  }
+}
   return (
     <div className="app">
       <Sidebar
