@@ -1,4 +1,3 @@
-// src/api/conversations.js
 const db = [
   {
     id: 'c1',

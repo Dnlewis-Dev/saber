@@ -54,34 +54,39 @@ export default function App() {
   }
 
   async function handleSendMessage(text) {
-    if (!activeConversationId) return;
+  if (!activeConversationId) return;
 
-    const userMsg = await messagesApi.createMessage(activeConversationId, {
-      role: 'user',
-      content: text,
+  const userMsg = await messagesApi.createMessage(activeConversationId, {
+    role: 'user',
+    content: text,
+  });
+  setMessages((prev) => [...prev, userMsg]);
+
+  setIsLoadingReply(true);
+
+  try {
+    const history = await messagesApi.listMessages(activeConversationId);
+
+    const assistantText = await requestOpenRouterCompletion({
+      messages: history.map((m) => ({ role: m.role, content: m.content })),
     });
 
-    setMessages((prev) => [...prev, userMsg]);
+    const assistantMsg = await messagesApi.createMessage(activeConversationId, {
+      role: 'assistant',
+      content: assistantText,
+    });
 
-    setIsLoadingReply(true);
-
-    try {
-      const history = await messagesApi.listMessages(activeConversationId);
-
-      const assistantText = await requestOpenRouterCompletion({
-        messages: history.map((m) => ({ role: m.role, content: m.content })),
-      });
-
-      const assistantMsg = await messagesApi.createMessage(activeConversationId, {
-        role: 'assistant',
-        content: assistantText,
-      });
-
-      setMessages((prev) => [...prev, assistantMsg]);
-    } finally {
-      setIsLoadingReply(false);
-    }
+    setMessages((prev) => [...prev, assistantMsg]);
+  } catch (err) {
+    const errorMsg = await messagesApi.createMessage(activeConversationId, {
+      role: 'assistant',
+      content: `⚠ OpenRouter failed: ${err?.message || String(err)}`,
+    });
+    setMessages((prev) => [...prev, errorMsg]);
+  } finally {
+    setIsLoadingReply(false);
   }
+}
 
   const activeConversation =
     conversations.find((c) => c.id === activeConversationId) || null;

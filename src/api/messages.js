@@ -1,4 +1,3 @@
-// src/api/messages.js
 const messagesDb = {
   c1: [
     { id: 'm1', role: 'assistant', content: 'Ask me anything about JavaScript.' },

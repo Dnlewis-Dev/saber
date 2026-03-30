@@ -1,14 +1,11 @@
-// src/api/llm.js
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
-// Put your key here for local dev (do NOT commit to public repos)
-const OPENROUTER_API_KEY = 'PASTE_KEY_HERE';
-
-// pick a model you have access to
+const OPENROUTER_API_KEY = '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';
+console.log('OPENROUTER_API_KEY length:', OPENROUTER_API_KEY?.trim()?.length);
 const MODEL = 'openai/gpt-4o-mini';
 
 export async function requestOpenRouterCompletion({ messages }) {
-  if (!OPENROUTER_API_KEY || OPENROUTER_API_KEY === 'PASTE_KEY_HERE') {
+  if (!OPENROUTER_API_KEY || OPENROUTER_API_KEY === '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') {
     throw new Error('Missing OpenRouter API key in src/api/llm.js');
   }
 
